@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+            xmlns:models="clr-namespace:MauiValidation;assembly=MauiValidation"
+            xmlns:viewModels="clr-namespace:MauiValidation"
+			 x:Class="MauiValidation.MainPage"
+			 x:DataType="viewModels:MainViewModel">
+
+	<Grid
+		ColumnDefinitions="*"
+        RowDefinitions="*,*">
+		<CollectionView
+			Grid.Row="0"
+			Grid.Column="0"
+			ItemsSource="{Binding PartAResultLists}"
+			SelectionMode="None">
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="models:PartAResultList">
+					<Grid Padding="5">
+						<Border>
+							<Grid Padding="10"
+									ColumnDefinitions="Auto,*"
+									RowDefinitions="Auto"
+									RowSpacing="7">
+								<Label Text="Outlet Type:" 
+											Grid.Column="0" Grid.Row="0"
+											HorizontalOptions="End"
+											VerticalOptions="Center"
+											Margin="0,0,0,0"/>
+								<Border
+										Grid.Column="1"
+										Grid.Row="0"
+										Grid.ColumnSpan="2">
+									<Entry
+											Text="{Binding PressDropResult}"
+											VerticalOptions="Start"
+											HorizontalOptions="StartAndExpand">
+										<Entry.Triggers>
+											<DataTrigger TargetType="Entry"
+														 Binding="{Binding [PressDropResult].HasError}"
+														 Value="True">
+												<Setter Property="BackgroundColor" Value="Red" />
+											</DataTrigger>
+											<DataTrigger TargetType="Entry"
+														 Binding="{Binding [PressDropResult].HasError}"
+														 Value="False">
+												<Setter Property="BackgroundColor" Value="Transparent" />
+											</DataTrigger>
+										</Entry.Triggers>
+									</Entry>
+								</Border>
+							</Grid>
+						</Border>
+					</Grid>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
+		</CollectionView>
+	</Grid>
+
+</ContentPage>
